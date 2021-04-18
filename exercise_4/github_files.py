@@ -1,3 +1,14 @@
+"""
+This program will connect to GitHub with a provided ACCESS_TOKEN, REPOSITORY_PATH and A FOLDER that contains json files.
+Once connected, it will iterate over the list of files in the FOLDER inside the REPOSITORY and execute the function on exercise_3
+using the filter array called fields.
+Parameters
+----------
+ACCESS_TOKEN str : The token to access GitHub
+REPOSITORY_PATH str : The path to the specific repository
+FOLDER str : The path to the folder inside the repository that has the json files.
+"""
+
 from github import Github
 import json
 from exercise_3.exercise_3 import filter_json as f
