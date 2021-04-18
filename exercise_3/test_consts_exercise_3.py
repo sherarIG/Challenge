@@ -77,3 +77,47 @@ expected_result_1 = {'[2].batters.batter[0].type': 'Regular'}
 
 list_of_keys_2 = ["[2].topping[3].id", "[2].type"]
 expected_result_2 = {'[2].type': 'donut', '[2].topping[3].id': '5004'}
+
+string_json_3 = '''
+{
+"problems": [{
+    "Diabetes":[{
+        "medications":[{
+            "medicationsClasses":[{
+                "className":[{
+                    "associatedDrug":[{
+                        "name":"asprin",
+                        "dose":"",
+                        "strength":"500 mg"
+                    }],
+                    "associatedDrug#2":[{
+                        "name":"somethingElse",
+                        "dose":"",
+                        "strength":"500 mg"
+                    }]
+                }],
+                "className2":[{
+                    "associatedDrug":[{
+                        "name":"asprin",
+                        "dose":"",
+                        "strength":"500 mg"
+                    }],
+                    "associatedDrug#2":[{
+                        "name":"somethingElse",
+                        "dose":"",
+                        "strength":"500 mg"
+                    }]
+                }]
+            }]
+        }],
+        "labs":[{
+            "missing_field": "missing_value"
+        }]
+    }],
+    "Asthma":[{}]
+}]} '''
+
+list_of_keys_3 = ["problems[0].Diabetes[0]", "problems[0].labs[0]"]
+
+expected_result_3 = {'problems[0].Diabetes[0]': {'medications': [{'medicationsClasses': [{'className': [{'associatedDrug': [{'name': 'asprin', 'dose': '', 'strength': '500 mg'}], 'associatedDrug#2': [{'name': 'somethingElse', 'dose': '', 'strength': '500 mg'}]}], 'className2': [{'associatedDrug': [{'name': 'asprin', 'dose': '', 'strength': '500 mg'}], 'associatedDrug#2': [{'name': 'somethingElse', 'dose': '', 'strength': '500 mg'}]}]}]}], 'labs': [{'missing_field': 'missing_value'}]}}
+

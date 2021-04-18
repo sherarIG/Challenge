@@ -3,7 +3,7 @@ import json
 
 def filter_json(input_json_string, json_keys):
     """ create a dictionary with the key / values of the keys listed in b based on the json string provided
-            :param input_json: Json file with an specific structure
+            :param input_json_string: Json file with an specific structure
             :param json_keys: list of keys that we want to filter from the json file
             :return: A dictionary with Key/Values considering the keys received in b and input_json
     """
