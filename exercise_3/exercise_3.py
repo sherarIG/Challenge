@@ -1,13 +1,14 @@
 import json
 
 
-def filter_json(input_json, json_keys):
+def filter_json(input_json_string, json_keys):
     """ create a dictionary with the key / values of the keys listed in b based on the json file provided
         In this particular case, we are considering the index that the key could have (example 'content.entities[2]')
             :param input_json: Json file with an specific structure
             :param json_keys: list of keys that we want to filter from the json file
             :return: A dictionary with Key/Values considering the keys received in b and input_json
     """
+    json_obj = json.loads(input_json_string)
     alt_dict = {}
 
     def json_recursive_path(x, name=''):
@@ -44,7 +45,7 @@ def filter_json(input_json, json_keys):
                 alt_dict[name[:-1]] = x
 
     # CALL json_recursive_path FOR THE FIRST TIME
-    json_recursive_path(input_json)
+    json_recursive_path(json_obj)
 
     return alt_dict
 
@@ -62,48 +63,5 @@ if __name__ == "__main__":
         }'''
     b = ["guid", "content.entities[2]", "score", "score.sign"]
 
-    new_string = '''
-    {
-        "quiz": {
-            "sport": {
-                "q1": {
-                    "question": "Which one is correct team name in NBA?",
-                    "options": [
-                        "New York Bulls",
-                        "Los Angeles Kings",
-                        "Golden State Warriros",
-                        "Huston Rocket"
-                    ],
-                    "answer": "Huston Rocket"
-                }
-            },
-            "maths": {
-                "q1": {
-                    "question": "5 + 7 = ?",
-                    "options": [
-                        "10",
-                        "11",
-                        "12",
-                        "13"
-                    ],
-                    "answer": "12"
-                },
-                "q2": {
-                    "question": "12 - 8 = ?",
-                    "options": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                    ],
-                    "answer": "4"
-                }
-            }
-        }
-    }'''
-
-    c = ["quiz.maths.q1.question"]
-
-    json_obj = json.loads(string)
-    final_dict = filter_json(json_obj, b)
+    final_dict = filter_json(string, b)
     print(final_dict)

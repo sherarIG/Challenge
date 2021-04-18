@@ -1,12 +1,15 @@
 import json
 
 
-def filter_json(input_json, json_keys):
-    """ create a dictionary with the key / values of the keys listed in b based on the json file provided
+def filter_json(input_json_string, json_keys):
+    """ create a dictionary with the key / values of the keys listed in b based on the json string provided
             :param input_json: Json file with an specific structure
             :param json_keys: list of keys that we want to filter from the json file
             :return: A dictionary with Key/Values considering the keys received in b and input_json
     """
+    # CONVERT THE STRING TO A JSON OBJECT
+    json_obj = json.loads(input_json_string)
+    # RESULTED DICTIONARY
     result_dict = {}
 
     def json_recursive_path(x, name=''):
@@ -35,16 +38,15 @@ def filter_json(input_json, json_keys):
             i = 0
             for a in x:
                 # RECURSIVELY ITERATE OVER THE ELEMENTS OF x, BECAUSE x IS A list
-                json_recursive_path(a, name + str(i) + '_')
+                json_recursive_path(a, name)
                 i += 1
         else:
             # FINALLY, x COULD ONLY BE A STRING, IF name[:-1] MATCHES ANY KEY ON b,
             # ADD THE PAIR key/value TO result_dict
-            if name[:-1] in json_keys:
+            if name[:-1] in json_keys and name[:-1] not in result_dict:
                 result_dict[name[:-1]] = x
     # CALL json_recursive_path FOR THE FIRST TIME
-    json_recursive_path(input_json)
-
+    json_recursive_path(json_obj)
     return result_dict
 
 
@@ -61,48 +63,5 @@ if __name__ == "__main__":
     }'''
     b = ["guid", "content.entities", "score", "score.sign"]
 
-    new_string = '''
-        {
-            "quiz": {
-                "sport": {
-                    "q1": {
-                        "question": "Which one is correct team name in NBA?",
-                        "options": [
-                            "New York Bulls",
-                            "Los Angeles Kings",
-                            "Golden State Warriros",
-                            "Huston Rocket"
-                        ],
-                        "answer": "Huston Rocket"
-                    }
-                },
-                "maths": {
-                    "q1": {
-                        "question": "5 + 7 = ?",
-                        "options": [
-                            "10",
-                            "11",
-                            "12",
-                            "13"
-                        ],
-                        "answer": "12"
-                    },
-                    "q2": {
-                        "question": "12 - 8 = ?",
-                        "options": [
-                            "1",
-                            "2",
-                            "3",
-                            "4"
-                        ],
-                        "answer": "4"
-                    }
-                }
-            }
-        }'''
-
-    c = ["quiz.maths.q1.question", "quiz.maths.q2"]
-
-    json_obj = json.loads(new_string)
-    final_dict = filter_json(json_obj, c)
+    final_dict = filter_json(string, b)
     print(final_dict)
