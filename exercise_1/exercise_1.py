@@ -10,6 +10,14 @@ def filter_json(input_json, json_keys):
     result_dict = {}
 
     def json_recursive_path(x, name=''):
+        """ Receives a dict or a list or a string and a key and populates a dictionary if the key matches
+            with one provided in the list of keys
+                    :param x: a dict or a list or a string (depending of the piece of data of the json file we
+                    are on.
+                    :param name: Originally an empty string, it will get the value of the different keys
+                    available.
+                    :return:
+            """
         # IF x IS A DICTIONARY
         if type(x) is dict:
             # IF name IS LISTED IN b, ADD THE PAIR key = name[:-1], value = x TO final_dict

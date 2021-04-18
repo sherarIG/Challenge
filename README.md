@@ -1,2 +1,2 @@
 # Challenge
- Challenge from Company X
+ Challenge proposed by Company X
