@@ -1,3 +1,17 @@
+"""
+This program will connect to an API from URLHAUS, download all the malware urls listed. It will create a dictionary
+with those urls and finally with the data create:
+- A json file
+- A csv file
+- An XML file
+- An SQLite database (parameter), a table (parameter) and store the data in the mentioned table.
+The dictionary structure is {id: , url:} where id is a unique incremental value.
+
+PARAMETERS:
+    db_name str : name for the database that the program will create
+    table_name str : name for the table that the program will create inside the database
+
+"""
 import requests
 from sql_admin import create_connection, create_table, add_record
 from file_admin import generate_json, generate_csv, generate_xml
