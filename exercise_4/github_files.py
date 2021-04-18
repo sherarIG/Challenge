@@ -15,7 +15,7 @@ from exercise_3.exercise_3 import filter_json as f
 
 # PARAMETERS
 # ACCESS TOKEN for gitHub
-ACCESS_TOKEN = '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'
+ACCESS_TOKEN = ''
 # Repository path
 repository_path = 'mitre/cti'
 # JSON files path
