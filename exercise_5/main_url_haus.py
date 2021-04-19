@@ -6,6 +6,7 @@ with those urls and finally with the data create:
 - An XML file
 - An SQLite database (parameter), a table (parameter) and store the data in the mentioned table.
 The dictionary structure is {id: , url:} where id is a unique incremental value.
+The program uses two modules: sql_admin that handles the interactions with the database and file_admin that handles the creation of each of the files
 
 PARAMETERS:
     db_name str : name for the database that the program will create
